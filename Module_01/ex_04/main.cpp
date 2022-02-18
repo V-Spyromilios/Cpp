@@ -27,12 +27,19 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	ifs >> temp;
+	if ((temp.substr(0, temp.find(' '))).compare(s1) == 0) {
+		temp = s2;
+		std::cout << temp;
+	}
+	else {
+		temp = temp.substr(0, temp.find(' '));
+		std::cout<< temp;
+	}
 	while (std::getline(ifs, temp, ' ')) {
 		if (temp.compare(s1) == 0)
 			temp = s2;
 		std::cout << temp << ' ';
 		}
-	
 	ifs.close();
 	return (0);
 }
