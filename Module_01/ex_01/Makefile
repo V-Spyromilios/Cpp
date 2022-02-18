@@ -11,9 +11,9 @@ RM = rm -f
 all: $(NAME)
 
 $(NAME):
-	$(CC) $(FLAGS) $(SRC) -o $@
+	@$(CC) $(FLAGS) $(SRC) -o $@
 
 clean:
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: clean all
