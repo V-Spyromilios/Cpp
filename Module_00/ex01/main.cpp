@@ -39,7 +39,7 @@ int	main()
 			ok = book.add(&i, &contact);
 		else if (rs == 3)
 		{
-			goodbye(book);
+			goodbye();
 			return (0);
 		}
 	}

@@ -70,6 +70,7 @@ void	Account::makeDeposit( int deposit ) {
 bool	Account::makeWithdrawal( int withdrawal ) {
 	_displayTimestamp();
 	if (this->_amount >= withdrawal) {
+			this->_nbWithdrawals++;
 			_totalNbWithdrawals++;
 			_totalAmount -= withdrawal;
 			std::cout<<"index:"<<this->_accountIndex<<";";

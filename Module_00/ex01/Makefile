@@ -1,10 +1,10 @@
-NAME = megaphone
+NAME = phonebook
 
 CC = c++
 
 FLAGS = -Werror -Wall -Wextra -std=c++98
 
-SRC = megaphone.cpp
+SRC = main.cpp PhoneBook.cpp goodbye.cpp Contact.cpp
 
 RM = rm -f
 

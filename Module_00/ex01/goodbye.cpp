@@ -1,8 +1,7 @@
 #include "includes.hpp"
 
-void	goodbye(PhoneBook book)
+void	goodbye()
 {
 	std::cout << "This computer will self-destruct in five seconds\n";
-	
 	return ;
 }

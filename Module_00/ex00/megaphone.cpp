@@ -14,19 +14,17 @@ void	print(char *s)
 			c = s[i] - 32;
 			std::cout << c;
 		}
-		else
-		{
-			c = s[i];
-			std::cout << c;
+		else {
+			std::cout << s[i];
 		}
 		i++;
 	}
 }
 
+
 int	main(int argc, char **argv)
 {
 	std::string	input;
-	char	c;
 	int		i;
 	int		j;
 	std::string	msg;
@@ -43,6 +41,7 @@ int	main(int argc, char **argv)
 	{
 		print(argv[i]);
 		i++;
+		std::cout << ' ';
 	}
 	std::cout << std::endl;
 	return (0);

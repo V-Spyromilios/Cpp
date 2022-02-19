@@ -11,5 +11,5 @@
 
 // main.c
 void	choose(std::string *response);
-void	goodbye(PhoneBook book);
+void	goodbye();
 #endif

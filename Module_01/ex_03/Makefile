@@ -1,10 +1,10 @@
-NAME = megaphone
+NAME = humans
 
 CC = c++
 
 FLAGS = -Werror -Wall -Wextra -std=c++98
 
-SRC = megaphone.cpp
+SRC = main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
 
 RM = rm -f
 
@@ -14,6 +14,7 @@ $(NAME):
 	@$(CC) $(FLAGS) $(SRC) -o $@
 
 clean:
+	
 	@$(RM) $(NAME)
 
 re: clean all

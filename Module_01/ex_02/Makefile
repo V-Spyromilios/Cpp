@@ -1,10 +1,10 @@
-NAME = megaphone
+NAME = brain
 
 CC = c++
 
 FLAGS = -Werror -Wall -Wextra -std=c++98
 
-SRC = megaphone.cpp
+SRC = main.cpp
 
 RM = rm -f
 
