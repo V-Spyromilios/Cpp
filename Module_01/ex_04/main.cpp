@@ -10,8 +10,9 @@ int	main(int argc, char **argv)
 	std::string s1;
 	std::string s2;
 	std::string temp;
-	std::string temp2;
 	std::ofstream outfile("copy.txt");
+	std::size_t found;
+	std::string::iterator it;
  
 	if (argc != 4) {
 		std::cout << "Please provide 4 arguments.\n";
@@ -23,23 +24,25 @@ int	main(int argc, char **argv)
 		s2 = argv[3];
 	}
 	else {
-		std::cout << "Error with opening File.\n";
+		std::cout << "Error while opening File: " << argv[1] << std::endl;
 		return (1);
 	}
-	ifs >> temp;
-	if ((temp.substr(0, temp.find(' '))).compare(s1) == 0) {
-		temp = s2;
-		std::cout << temp;
+	if (s1.length() == 0) {
+		std::cout << "Length of First Argument Cannot be (0)\n";
+		return (-1);
 	}
-	else {
-		temp = temp.substr(0, temp.find(' '));
-		std::cout<< temp;
+	if (!outfile.good()) {
+		std::cout << "Error with: copy.txt\n";
+		return (-1);
 	}
-	while (std::getline(ifs, temp, ' ')) {
-		if (temp.compare(s1) == 0)
-			temp = s2;
-		std::cout << temp << ' ';
+	while (std::getline(ifs, temp)) {
+		while ((found = temp.find(s1)) != std::string::npos) {
+			temp.erase(found, s1.length());
+			temp.insert(found, s2);
 		}
+		outfile << temp << std::endl;
+	}
 	ifs.close();
+	outfile.close();
 	return (0);
 }
