@@ -52,4 +52,3 @@ int		Fixed::toInt(void) const {
 std::ostream& operator<<(std::ostream &stream, Fixed const &ref) {
 	return (stream << ref.toFloat());
 }
-

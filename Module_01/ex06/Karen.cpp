@@ -6,7 +6,7 @@ levels hashit (std::string const &level) {
 	if (level == "DEBUG") {return edebug;}
 	if (level == "INFO") {return einfo;}
 	if (level == "WARNING") {return ewarning;}
-	if (level == "ERROR") {return eerror;}
+	if (level == "ERROR") {std::cout << eerror << std::endl; return eerror;}
 	else {return eee;}
 }
 
