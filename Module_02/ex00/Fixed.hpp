@@ -17,7 +17,7 @@ public:
 private:
 
 	int	_storage;
-	static const int bits;
+	static const int _bits;
 
 };
 #endif

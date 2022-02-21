@@ -1,5 +1,7 @@
 #include "Fixed.hpp"
 
+const int	Fixed::_bits = 8;
+
 Fixed::Fixed(void): _storage(0) {
 	std::cout << "Default Constructor Called" << std::endl;
 
@@ -7,7 +9,7 @@ Fixed::Fixed(void): _storage(0) {
 
 Fixed::Fixed(Fixed const &src) {
 	std::cout << "Copy Constructor Called" << std::endl;
-	*this= src;
+	*this = src;
 
 }
 
@@ -30,7 +32,9 @@ Fixed::~Fixed(void) {
 	std::cout << "Destructor Called" << std::endl;
 }
 
+void	Fixed::setRawBits(int const raw) {
+	this->_storage = raw;
 
-
+}
 
 
