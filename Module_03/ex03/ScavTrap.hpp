@@ -17,9 +17,5 @@ public:
 	void 	guardGate();
 	void	attack(const std::string &target);
 
-private:
-
-	std::string _name;
-
 };
 #endif

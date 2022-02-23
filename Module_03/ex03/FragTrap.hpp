@@ -18,12 +18,5 @@ public:
 	void 	highFivesGuys(void);
 	void	attack(const std::string &target);
 
-private:
-
-	std::string _name;
-	int	_hPoints;
-	int _ePoints;
-	int _aDamage;
-
 };
 #endif

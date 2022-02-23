@@ -13,9 +13,6 @@ DiamondTrap::DiamondTrap(std::string const name) {
 	this->FragTrap::setHP(f.getHP());
 	this->ScavTrap::setEP(s.getEP());
 	this->FragTrap::setAD(f.getAD());
-	std::cout <<"DT Constructor's HP: " << FragTrap::getHP() << std::endl;
-	std::cout <<"DT Constructor's EP: " << ScavTrap::getEP() << std::endl;
-	std::cout <<"DT Constructor's AD: " << FragTrap::getAD() << std::endl;
 	std::cout << "DiamondTrap Name Constructor called." <<std::endl;
 
 }
@@ -37,14 +34,13 @@ DiamondTrap& DiamondTrap::operator=(DiamondTrap const & src) {
 
 DiamondTrap::~DiamondTrap() {
 	std::cout << "DiamondTrap Destructor called." <<std::endl;
-
 }
 
-void	takeDamage(unsigned int amount);
+// void	takeDamage(unsigned int amount);
 	 
-void	beRepaired(unsigned int amount);
+// void	beRepaired(unsigned int amount);
 
-void	setName(std::string name);
+// void	setName(std::string name);
 	 
 std::string getName();
 
