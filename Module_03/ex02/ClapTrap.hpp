@@ -26,7 +26,7 @@ public:
 	void		setAD(int attack);
 
 
-private:
+protected:
 
 	std::string _name;
 	int	_hPoints;

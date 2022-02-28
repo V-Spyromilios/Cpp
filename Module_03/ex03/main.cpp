@@ -16,5 +16,6 @@ int		main(void) {
 	std::cout << "=====" << std::endl;
 	D.whoAmI();
 	DD.whoAmI();
+	D.guardGate();
 	return (0);
 }

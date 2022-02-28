@@ -3,7 +3,9 @@
 
 #include <iostream>
 #include "ClapTrap.hpp"
-
+#define MAX_AD 30
+#define MAX_HP 100
+#define MAX_EP 100
 
 class FragTrap: public ClapTrap {
 public:
@@ -17,13 +19,6 @@ public:
 	void 	guardGate();
 	void 	highFivesGuys(void);
 	void	attack(const std::string &target);
-
-private:
-
-	std::string _name;
-	int	_hPoints;
-	int _ePoints;
-	int _aDamage;
 
 };
 #endif

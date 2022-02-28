@@ -3,6 +3,7 @@
 #include "WrongCat.hpp"
 
 int		main(void)  {
+
 	const AnimalClass *dyno = new AnimalClass();
 	const AnimalClass *cat = new CatClass();
 	const AnimalClass *doggie = new DogClass();

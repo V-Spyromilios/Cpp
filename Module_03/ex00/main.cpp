@@ -1,6 +1,6 @@
 #include "ClapTrap.hpp"
 
-int		main() {
+int		main(void) {
 
 	ClapTrap	mankas("Mankas");
 	ClapTrap	kariolis("Kariolis");

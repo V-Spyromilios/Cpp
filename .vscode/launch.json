@@ -8,9 +8,9 @@
 			"type": "lldb",
 			"request": "launch",
 			"name": "Debug",
-			"program": "/Users/evangelosspyromilios/Desktop/CppGh/Module_01/ex_00/zombie",
+			"program": "/Users/evangelosspyromilios/Desktop/CppGh/Module_04/ex_03/amateria",
 			"args": [],
-			"cwd": "/Users/evangelosspyromilios/Desktop/CppGh/Module_01/ex_00"
+			"cwd": "/Users/evangelosspyromilios/Desktop/CppGh/Module_04/ex_03"
 		}
 	]
 }

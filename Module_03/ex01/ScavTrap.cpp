@@ -31,9 +31,9 @@ ScavTrap::~ScavTrap() {
 	std::cout << "ScavTrap Destructor called" << std::endl;
 }
 
-// void ScavTrap::guardGate() {
-// 	std::cout << "Gate Keeper Mode" << std::endl;
-// }
+void ScavTrap::guardGate() {
+	std::cout << "Gate Keeper Mode" << std::endl;
+}
 
 void	ScavTrap::attack(const std::string &target) {
 	if (this->getHP() <= 0) {

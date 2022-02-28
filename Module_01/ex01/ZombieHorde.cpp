@@ -7,5 +7,5 @@ Zombie*	zombieHorde(int N, std::string name) {
 		Horde[i].setname(name);
 		Horde[i].announce();
 	}
-	return(Horde);
+	return (Horde);
 }

@@ -1,6 +1,12 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(std::string name): _name(name) {
+ClapTrap::ClapTrap() {
+	this-> _hPoints = MAX_HP;
+	this-> _ePoints = MAX_EP;
+	this-> _aDamage = MAX_AD;
+}
+
+ClapTrap::ClapTrap(std::string name): _name(name), _hPoints(MAX_HP), _ePoints(MAX_EP), _aDamage(MAX_AD) {
 	this-> _hPoints = 10;
 	this-> _ePoints = 10;
 	this-> _aDamage = 0;
@@ -8,8 +14,26 @@ ClapTrap::ClapTrap(std::string name): _name(name) {
 }
 
 ClapTrap::~ClapTrap() {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "Destructor Called" << std::endl;
 }
+
+ClapTrap::ClapTrap(ClapTrap const &src) {
+	*this = src;
+	std::cout << "Copy Constructor Called" << std::endl;
+}
+
+//gets MUST be const in overloaders. lvalues must
+// be used with const. lvalue: its evaluation determines the identity of the object.
+ClapTrap& ClapTrap::operator=(ClapTrap const & src) {
+	if (this != &src) {
+		this->_name = src.getName();
+		this->_hPoints = src.getHP();
+		this->_ePoints = src.getEP();
+		this->_aDamage = src.getAD();
+	}
+	return (*this);
+}
+
 
 void	ClapTrap::attack(const std::string &target) {
 	if (this->_hPoints <= 0) {
@@ -60,6 +84,18 @@ void	ClapTrap::beRepaired(unsigned int amount) {
 	}
 }
 
-std::string	ClapTrap::getName() {
+std::string	ClapTrap::getName() const{
 	return (this->_name);
+}
+
+int	ClapTrap::getAD() const{
+	return (this->_aDamage);
+}
+
+int	ClapTrap::getEP() const{
+	return (this->_ePoints);
+}
+
+int	ClapTrap::getHP() const{
+	return (this->_hPoints);
 }

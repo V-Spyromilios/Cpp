@@ -1,17 +1,14 @@
 #include "ClapTrap.hpp"
 
+
 ClapTrap::ClapTrap() {
-	this-> _hPoints = 10;
-	this-> _ePoints = 10;
-	this-> _aDamage = 0;
+	this-> _hPoints = MAX_HP;
+	this-> _ePoints = MAX_EP;
+	this-> _aDamage = MAX_AD;
 	std::cout << "ClapTrap void Constructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string name) {
-	this-> _hPoints = 10;
-	this-> _ePoints = 10;
-	this-> _aDamage = 0;
-	this-> _name = name;
+ClapTrap::ClapTrap(std::string name): _name(name), _hPoints(MAX_HP), _ePoints(MAX_EP), _aDamage(MAX_AD) {
 	std::cout << "ClapTrap 'name' Constructor called" << std::endl;
 }
 

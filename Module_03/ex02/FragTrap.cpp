@@ -2,27 +2,27 @@
 
 
 FragTrap::FragTrap() {
-	this->setHP(100);
-	this->setEP(100);
-	this->setAD(30);
+	this->setHP(MAX_HP);
+	this->setEP(MAX_EP);
+	this->setAD(MAX_AD);
 	this->setName(""); 
 	std::cout << "FragTrap Void Constructor called" << std::endl;
 }
 
 FragTrap::FragTrap(std::string name) {
-	this->setHP(100);
-	this->setEP(100);
-	this->setAD(30);
+	this->setHP(MAX_HP);
+	this->setEP(MAX_EP);
+	this->setAD(MAX_AD);
 	this->setName(name); 
 	std::cout << "FragTrap Constructor Called with name: " << name << std::endl;
 }
 
 FragTrap::FragTrap(FragTrap & src) {
 	if (this != &src) {
-		this->_name = src.getName();
-		this->_hPoints = src.getHP();
-		this->_aDamage = src.getAD();
-		this->_ePoints = src.getEP();
+		this->setName(src.getName());
+		this->setHP(src.getHP());
+		this->setAD(src.getAD());
+		this->setEP(src.getEP());
 	}
 	std::cout << "FragTrap Copy Constructore called" << std::endl;
 }
@@ -32,16 +32,21 @@ FragTrap::~FragTrap() {
 }
 
 void FragTrap::guardGate() {
+	if (this->getHP() > 0) {
 	std::cout << "<FragTrap> Gate Keeper Mode" << std::endl;
+	}
+	else {
+		std::cout << "Can't Guard any gate right now, I am DEAD AF" << std::endl;
+	}
 }
 
 void	FragTrap::attack(const std::string &target) {
 	if (this->getHP() <= 0) {
-		std::cout << "I'm already dead, but still a true FragTrap" << std:: endl;
+		std::cout << "I'm already dead, but still a huge fan of your code" << std:: endl;
 		return ;
 	}
 	if (this->getEP() < 1) {
-		std::cout << "FragTrap is tired.." << std::endl;
+		std::cout << "I am too tired.." << std::endl;
 	}
 	else {
 		this->setEP(this->getHP() - 1);
@@ -51,5 +56,10 @@ void	FragTrap::attack(const std::string &target) {
 }
 
 void 	FragTrap::highFivesGuys(void) {
+	if (this->getHP() > 0) {
 	std::cout << "Gimme five you Frag!" << std::endl;
+	}
+	else {
+		std::cout << "Can't high 5 dude, I am DEAD AF" << std::endl;
+	}
 }

@@ -2,7 +2,7 @@
 #define FIXED_HPP
 
 #include <iostream>
-#include <cmath>
+//#include <cmath>
 
 class Fixed {
 public:
@@ -48,10 +48,8 @@ private:
 
 	int		_storage;
 	static const int _bits;
-
 };
 
 std::ostream& operator<<(std::ostream &stream, Fixed const &ref);
-
 
 #endif

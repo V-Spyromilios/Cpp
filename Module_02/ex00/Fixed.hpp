@@ -11,12 +11,12 @@ public:
 	Fixed(Fixed const &src);
 	~Fixed();
 
-	int	getRawBits(void) const;
+	int		getRawBits(void) const;
 	void	setRawBits(int const raw);
 
 private:
 
-	int	_storage;
+	int				_storage;
 	static const int _bits;
 
 };
