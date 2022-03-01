@@ -14,7 +14,7 @@ Cure::Cure(Cure const &src): AMateria(src) {
 
 Cure& Cure::operator=(Cure const &src) {
 	if (this != &src) {
-		this->type = src.type;
+		this->_type = src._type;
 	}
 	return (*this);
 }
@@ -24,7 +24,7 @@ Cure::~Cure() {
 }
 
 void	Cure::setType(std::string type) {
-	this->type = type;
+	this->_type = type;
 }
 
 Cure* Cure::clone() const{

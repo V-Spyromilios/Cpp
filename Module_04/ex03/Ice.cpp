@@ -14,7 +14,7 @@ Ice::Ice(Ice const &src): AMateria(src) {
 
 Ice& Ice::operator=(Ice const &src) {
 	if (this != &src) {
-		this->type = src.type;
+		this->_type = src._type;
 	}
 	return (*this);
 }
@@ -24,7 +24,7 @@ Ice::~Ice() {
 }
 
 void	Ice::setType(std::string type) {
-	this->type = type;
+	this->_type = type;
 }
 
 AMateria* Ice::clone() const{

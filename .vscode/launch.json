@@ -5,9 +5,9 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"type": "lldb",
+			"type": "cppdbg",
 			"request": "launch",
-			"name": "Debug",
+			"name": "C++ Launch",
 			"program": "/Users/evangelosspyromilios/Desktop/CppGh/Module_04/ex_03/amateria",
 			"args": [],
 			"cwd": "/Users/evangelosspyromilios/Desktop/CppGh/Module_04/ex_03"

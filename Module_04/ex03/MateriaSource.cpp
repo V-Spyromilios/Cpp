@@ -19,12 +19,11 @@ MateriaSource::~MateriaSource() {
 }
 
 MateriaSource::MateriaSource(const MateriaSource &src) {
-	std::cout << "MateriaSource copy constructor called." << std::endl;
 	*this = src;
+	std::cout << "MateriaSource copy constructor called." << std::endl;
 }
 
 MateriaSource &MateriaSource::operator=(const MateriaSource &rhs) {
-	std::cout << "MateriaSource copy constructor called." << std::endl;
 	if (this != &rhs)
 	{
 		this->_materia[0] = rhs._materia[0];
@@ -32,6 +31,7 @@ MateriaSource &MateriaSource::operator=(const MateriaSource &rhs) {
 		this->_materia[2] = rhs._materia[2];
 		this->_materia[3] = rhs._materia[3];
 	}
+	std::cout << "MateriaSource copy constructor called." << std::endl;
 	return *this;
 }
 
@@ -45,7 +45,7 @@ void MateriaSource::learnMateria(AMateria *materia) {
 			i++;
 		if (i == 3)
 		{
-			std::cout << "There are already 4 learnt materials. No more material can be learnt. " << std::endl;
+			std::cout << "There are already 4 materials..." << std::endl;
 			return;
 		}
 		this->_materia[i] = materiaCopy;
@@ -58,7 +58,7 @@ void MateriaSource::learnMateria(AMateria *materia) {
 			i++;
 		if (i == 3)
 		{
-			std::cout << "There are already 4 learnt materials. No more material can be learnt. " << std::endl;
+			std::cout << "There are already 4 materials..." << std::endl;
 			return;
 		}
 		this->_materia[i] = materiaCopy;

@@ -6,26 +6,23 @@
 #include "ICharacter.hpp"
 
 class Character: public ICharacter {
-public:
-
-	Character();
-	Character(std::string const &type);
-	Character &operator=(Character const &src);
-	Character(Character const &src);
-	~Character();
-
-	virtual std::string const & getName() const;
-	virtual void equip(AMateria* m);
-	virtual void unequip(int idx);
-	virtual void use(int idx, ICharacter& target);
-
-	void 		setName(std::string name);
-	void		deleteSlots(AMateria** materia);
 
 private:
+	std::string 	_name;
+	AMateria 		**_materia;
 
-	std::string _name;
-	AMateria *_slots[4];
+public:
+	Character();
+	Character(const char *name);
+	~Character();
+	Character(Character const & src);
+	Character & operator=(Character const & rhs);
+
+	std::string const & getName() const;
+	void 				equip(AMateria* m);
+	void 				unequip(int idx);
+	void 				use(int idx, ICharacter& target);
+	AMateria*			getMateria(int i);
 
 };
 

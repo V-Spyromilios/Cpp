@@ -4,36 +4,33 @@
 #include "Ice.hpp"
 #include "Cure.hpp"
 
+Character::Character() : _name("Character"), _materia(new AMateria*[4]()){
 
-Character::Character(): _name("") {
-	for (int c =0; c < 4; c++) {    // :-)
-		this->_slots[c] = NULL;
-	}
-	std::cout << "Character Void Constructor called" << std::endl;
 }
 
-Character::Character(std::string const &type): _name(type) {
-	for (int c =0; c < 4; c++) {
-		this->_slots[c] = NULL;
-	}
-	std::cout << "Character Type Constructor called" << std::endl;
+Character::Character(const char *name) : _name(name), _materia(new AMateria*[4]()){
+
 }
 
-Character::Character(Character const & src) {
+Character::~Character() {
+	int i = 0;
+	while (i < 3)
+	{
+		if (_materia[i])
+			delete (_materia[i]);
+		i++;
+	}
+	delete[] (_materia);
+}
+
+Character::Character(const Character &src) {
+
+	this->_materia = new AMateria*[4]();
+	std::cout << "Character copy constructor called" << std::endl;
 	*this = src;
 }
 
-Character& Character::operator=(Character const &src) {
-	if (this != &src) {
-		this->_slots[0] = src._slots[0];
-		this->_slots[1] = src._slots[1];
-		this->_slots[2] = src._slots[2];
-		this->_slots[3] = src._slots[3];
-	}
-	return (*this);
-}
-
-void	Character::deleteSlots(AMateria** materia)
+void	deleteMateria(AMateria** materia)
 {
 	int i = 0;
 	while (i < 3)
@@ -45,56 +42,77 @@ void	Character::deleteSlots(AMateria** materia)
 	delete[] materia;
 }
 
-Character::~Character() {
-	int i = 0;
-	while (i < 3)
+Character &Character::operator=(const Character &rhs) {
+	if (this != &rhs)
 	{
-		if (_slots[i])
-			delete (_slots[i]);
-		i++;
+		this->_name = rhs.getName();
+		if (this->_materia) {
+			deleteMateria(this->_materia);
+		}
+		AMateria **materialNew = new AMateria*[4];
+		int i = 0;
+		while (i < 3)
+		{
+			if (rhs._materia[i])
+				materialNew[i] = rhs._materia[i]->clone();
+			else
+				materialNew[i] = NULL;
+			i++;
+		}
+		this->_materia = materialNew;
 	}
-	deleteSlots(_slots);
-	std::cout << "Character Destructor called" << std::endl;
+	std::cout << "Character Assignation Operator called" << std::endl;
+	return *this;
 }
 
-std::string const & Character::getName() const {
+std::string const &Character::getName() const {
 	return this->_name;
 }
 
-void Character::setName(std::string name) {
-	this->_name = name;
+void Character::equip(AMateria *m) {
+	if (!m)
+	{
+		std::cout << "The Materia to equip is not valid." << std::endl;
+		return;
+	}
+	int i = 0;
+	while (this->_materia[i])
+	{
+		if (!this->_materia[i])
+			break;
+		i++;
+	}
+	if (i == 3 && this->_materia[i])
+	{
+		std::cout << "The inventory is full." << std::endl;
+		return;
+	}
+	std::cout << "Equiped" << std::endl;
+	this->_materia[i] = m;
 }
 
-void Character::equip(AMateria* m) {
-	if (!m) {
-		std::cout << "AMateria not valid for 'equip'" << std::endl;
-		return ;
+void Character::unequip(int idx) {
+	if (idx >= 0 && idx <= 3 && this->_materia[idx])
+	{
+		this->_materia[idx] = NULL;
+		std::cout << "Materia " << idx << " unequipped." << std::endl;
 	}
-	for (int steps = 0; steps < 4; steps++) {
-		if (steps == 0 && this->_slots[steps] == NULL) {
-			this->_slots[steps] = m;
-			steps++;
-		}
-		if (steps == 0)
-			std::cout << "No free space" << std::endl;
-	}
-}
-
-void Character::unequip(int idx)
-{
-	if (this->_slots[idx] == NULL)
-		std::cout << "inventory empty." << std::endl;
 	else
-		this->_slots[idx] = NULL;
+		std::cout << "Please provide valid materia." << std::endl;
 }
 
-void	Character::use(int idx, ICharacter& target)
-{
-	if (this->_slots[idx] == NULL || idx < 0 || idx > 3) {
-		std::cout << "There is nothing here" << std::endl;
+void Character::use(int idx, ICharacter &target) {
+
+	AMateria *materiaUse = this->getMateria(idx);
+	if (materiaUse && (!materiaUse->getType().compare("ice") || !materiaUse->getType().compare("cure")))
+		materiaUse->use(target);
+	else
+	{
+		std::cout << "Error on use()" << std::endl;
+		delete materiaUse;
 	}
-	else {
-		this->_slots[idx]->use(target);
-		this->_slots[idx] = NULL;
-	}
+}
+
+AMateria *Character::getMateria(int i) {
+	return this->_materia[i];
 }
