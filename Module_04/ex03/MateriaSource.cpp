@@ -10,12 +10,6 @@ MateriaSource::MateriaSource() {
 }
 
 MateriaSource::~MateriaSource() {
-//	int i = 0;
-//	while (this->_materia[i] && i < 3)
-//	{
-//		delete (this->_materia[i]);
-//		i++;
-//	}
 }
 
 MateriaSource::MateriaSource(const MateriaSource &src) {

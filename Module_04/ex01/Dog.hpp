@@ -18,7 +18,7 @@ public:
 	std::string getType() const;
 
 	void		makeSound(void) const;
-	std::string 		getIdeas();
+	std::string getIdeas();
 
 private:
 

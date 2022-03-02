@@ -17,7 +17,7 @@ public:
 	void		setType(std::string type);
 	std::string getType() const;
 
-	virtual void		makeSound(void) const;
+	void		makeSound(void) const;  //'virtual' to be inhereted bu others
 
 private:
 

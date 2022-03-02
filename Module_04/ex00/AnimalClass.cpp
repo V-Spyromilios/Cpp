@@ -5,8 +5,8 @@ AnimalClass::AnimalClass() {
 }
 
 AnimalClass::AnimalClass(AnimalClass const &src) {
-		*this = src;
-		std::cout << "Copy Animal Constructor called" << std::endl;
+	*this = src;
+	std::cout << "Copy Animal Constructor called" << std::endl;
 }
 
 AnimalClass::AnimalClass(std::string name): type(name) {

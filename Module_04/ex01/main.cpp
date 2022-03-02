@@ -26,9 +26,5 @@ int		main(void) {
 		delete a[i];
 		i++;
 	}
-// j->makeSound();
-// j->brain;
-// delete j;
-
 return (0); 
 }

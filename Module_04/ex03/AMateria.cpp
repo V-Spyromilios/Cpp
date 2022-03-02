@@ -16,7 +16,7 @@ std::string const & AMateria::getType() const {
 	return this->_type;
 }
 
-//Non pure virtuals must provide implementation on Parent.cpp before overwrite
+//Non pure virtuals must provide implementation on Parent.cpp before overwriten
 void use(ICharacter &target) {
 	(void)target;
 }

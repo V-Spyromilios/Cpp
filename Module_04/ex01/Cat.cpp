@@ -7,9 +7,9 @@ Cat::Cat() {
 	std::cout << "Void Cat Constructor called" << std::endl;
 }
 
-Cat::Cat(Cat const &src) { //google this
-		*this = src;
-		std::cout << "Copy Cat Constructor called" << std::endl;
+Cat::Cat(Cat const &src) {
+	*this = src;
+	std::cout << "Copy Cat Constructor called" << std::endl;
 }
 
 Cat&  Cat::operator=(Cat const &src) {
