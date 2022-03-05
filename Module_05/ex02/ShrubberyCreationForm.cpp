@@ -1,40 +1,70 @@
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm(): Form() {
-
-	std::cout << "ShrubberyCreationForm Void Constructor called" << std::endl;
+ShrubberyCreationForm::ShrubberyCreationForm(): Form("Shrubbery Creation Form", 145, 137) {
+	this->_target = "";
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &src) {
-
-	*this = src;
-	std::cout << "ShrubberyCreationForm Copy Constructor called" << std::endl;
-}
-
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target): Form("", 145, 137) {
-
+ShrubberyCreationForm::ShrubberyCreationForm(std::string const target): Form("Shrubbery Creation Form", 145, 137) {
 	this->_target = target;
-	std::cout << "ShrubberyCreationForm Target Constructor called" << std::endl;
 }
 
-ShrubberyCreationForm& ShrubberyCreationForm::operator=( ShrubberyCreationForm const &src) {
-
-	if (this != &src) {
-		this->_target = src._target;
-	}
-	return (*this);
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const & src) {
+	*this = src;
 }
 
-ShrubberyCreationForm::~ShrubberyCreationForm() {
-	std::cout << "ShrubberyCreationForm Destructor called" <<std::endl;
+ShrubberyCreationForm::~ShrubberyCreationForm(){
+
 }
 
-void		ShrubberyCreationForm::setTarget(std::string t) {
-
-	this->_target = t;
+ShrubberyCreationForm&	ShrubberyCreationForm::operator=(ShrubberyCreationForm const & src) {
+	if (this != &src)
+		this->_target = src.getTarget();
+	return *this;
 }
 
-std::string	ShrubberyCreationForm::getTarget() {
-
+std::string	ShrubberyCreationForm::getTarget(void) const{
 	return this->_target;
+}
+
+void		ShrubberyCreationForm::execute(Bureaucrat const & executor) const{
+		if (this->getIsSigned() == false) {
+			throw Form::NoSignRightsException();
+		} else {
+			if (this->getExecGrade() >= executor.getGrade()) {
+				std::ofstream file;
+				file.open(this->getTarget() + "_shrubbery");
+				if (file.is_open()) {
+					file << std::endl;
+					file << "      .              .              ;%     ;; " << std::endl;
+					file << "        ,           ,                :;%  %; " << std::endl;
+					file << "         :         ;                   :;%;'     ., " << std::endl;
+					file << ",.        %;     %;            ;        %;'    ,; " << std::endl;
+					file << "  ;       ;%;  %%;        ,     %;    ;%;    ,%' " << std::endl;
+					file << "   %;       %;%;      ,  ;       %;  ;%;   ,%;' " << std::endl;
+					file << "    ;%;      %;        ;%;        % ;%;  ,%;' " << std::endl;
+					file << "     `%;.     ;%;     %;'         `;%%;.%;' " << std::endl;
+					file << "      `:;%.    ;%%. %@;        %; ;@%;%' " << std::endl;
+					file << "         `:%;.  :;bd%;          %;@%;' " << std::endl;
+					file << "           `@%:.  :;%.         ;@@%;' " << std::endl;
+					file << "             `@%.  `;@%.      ;@@%; " << std::endl;
+					file << "               `@%%. `@%%    ;@@%; " << std::endl;
+					file << "                 ;@%. :@%%  %@@%; " << std::endl;
+					file << "                   %@bd%%%bd%%:; " << std::endl;
+					file << "                     #@%%%%%:;; " << std::endl;
+					file << "                     %@@%%%::; " << std::endl;
+					file << "                     %@@@%(o);  . ' " << std::endl;
+					file << "                     %@@@o%;:(.,' " << std::endl;
+					file << "                 `.. %@@@o%::; " << std::endl;
+					file << "                    `)@@@o%::; " << std::endl;
+					file << "                     %@@(o)::; " << std::endl;
+					file << "                    .%@@@@%::; " << std::endl;
+					file << "                    ;%@@@@%::;. " << std::endl;
+					file << "                   ;%@@@@%%:;;;. " << std::endl;
+					file << "               ...;%@@@@@%%:;;;;,.. Evangelos ";
+				}
+				file.close();
+			} else {
+				throw Form::GradeTooLowException();
+			}
+		}
 }

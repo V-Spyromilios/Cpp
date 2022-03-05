@@ -10,6 +10,8 @@ int		main(void) {
 	f.beSigned(b);
 	std::cout << "=== == == =" <<std::endl;
 	f.beSigned(s);
+	std::cout << "=== == == =" <<std::endl;
+	std::cout << f;
 
 	return (0);
 }

@@ -4,6 +4,17 @@ Bureaucrat::Bureaucrat():_grade(150), _name("Pasok")  {
 	std::cout << "Void Bureaucrat Constructor called" << std::endl;
 }
 
+Bureaucrat::Bureaucrat(Bureaucrat const &src) {
+	*this = src;
+}
+
+Bureaucrat& Bureaucrat::operator=(Bureaucrat const &src) {
+	if (this != &src) {
+		this->setGrade(src.getGrade());
+	}
+	return (*this);
+}
+
 Bureaucrat::Bureaucrat(std::string name, int grade): _name(name) {
 	try {
 		if (grade > 150) {
@@ -35,21 +46,9 @@ const char* Bureaucrat::GradeTooLowException::what(void) const throw() {
 	return ("Grade Too Low");
 }
 
-Bureaucrat::Bureaucrat(Bureaucrat const &src) {
-	*this = src;
-}
-
-Bureaucrat& Bureaucrat::operator=(Bureaucrat const &src) {
-	if (this != &src) {
-		this->setGrade(src.getGrade());
-	}
-	return (*this);
-}
-
 Bureaucrat::~Bureaucrat() {
 	std::cout << "Bureaucrat Destructor called" << std::endl;
 }
-
 
 std::ostream& operator<<(std::ostream &stream, Bureaucrat const &ref) {
 	return (stream << ref.getName() << " , bureaucrat grade" << ref.getGrade());

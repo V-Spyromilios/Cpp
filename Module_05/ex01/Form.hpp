@@ -24,7 +24,6 @@ public:
 	int				getGradeExe();
 	std::string		getName();
 
-
 	class GradeTooHighException: public std::exception {
 		public:
 		virtual	const char* what() const throw();
@@ -44,5 +43,6 @@ private:
 	const int	_gradeExe;
 
 };
+std::ostream& operator<<(std::ostream &stream, Form &f);
 
 #endif

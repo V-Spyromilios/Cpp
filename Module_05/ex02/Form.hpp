@@ -1,53 +1,51 @@
 #ifndef FORM_HPP
 #define FORM_HPP
 
-#include <iostream>
-#include <exception>
 #include "Bureaucrat.hpp"
 
 class Bureaucrat;
 
 class Form {
 
-public:
+	public:
+		Form();
+		Form(std::string form, unsigned int sG, unsigned int eG);
+		Form(Form const & src);
+		virtual ~Form();
 
-	Form();
-	Form(Form const &src);
-	Form(std::string form, int grToSign, int grToExe);
-	Form& operator=(const Form &src);
-	~Form();
+		Form&	operator=(Form const & other);
 
-	void			signForm();
-	void			beSigned(Bureaucrat &ref);
-	bool			is_Signed();
-	virtual	int		getGradeSign() = 0;  //Pure 
-	virtual int		getGradeExe() = 0;	//Pure 
-	std::string		getName();
+		class GradeTooHighException: public std::exception {
+			public:
+				const char * what() const throw ();
+		};
 
-	class GradeTooHighException: public std::exception {
-		public:
-		virtual	const char* what() const throw();
-	};
+		class GradeTooLowException: public std::exception {
+			public:
+				const char * what() const throw ();
+		};
 
-	class GradeTooLowException: public std::exception {
-		public:
-		virtual	const char* what() const throw();
-	};
+		class NoSignRightsException: public std::exception {
+			public:
+				const char * what() const throw ();
+		};
 
-	void		setGradeSign(int grade);
-	void		setGradeExe(int grade);
-	void		setName(std::string name);
-	void		setSignature(bool signed);
+		virtual std::string		getFormName() const;
+		virtual unsigned int	getSignGrade() const;
+		virtual unsigned int	getExecGrade() const;
+		virtual bool			getIsSigned() const;
 
+		virtual void		beSigned(Bureaucrat const & b);
 
-private:
-
-	const std::string _name;
-	bool		_isSigned;
-	const int	_gradeSign;
-	const int	_gradeExe;
+		virtual void		execute(Bureaucrat const & executor) const = 0;
+	
+	private:
+		const std::string	_formName;
+		const unsigned int	_signGrade;
+		const unsigned int	_execGrade;
+		bool				_isSigned;
 };
 
-std::ostream& operator<<(std::ostream &stream, Form &f);
+std::ostream&	operator<<(std::ostream &o, Form & obj);
 
 #endif

@@ -25,6 +25,13 @@ Form::Form(std::string form, int grToSign, int grToExe): _name(form), _isSigned(
 	}
 }
 
+std::ostream&	operator<<(std::ostream &stream, Form &f) {
+	if (f.is_Signed() == true) 
+		return (stream << "Form \"" << f.getName() <<  "\" with Sign Grade " << f.getGradeSign() << " and Execution Grade " << f.getGradeExe() << " is signed" << std::endl);
+	else 
+		return (stream << "Form \"" << f.getName() <<  "\" with Sign Grade " << f.getGradeSign() << " and Execution Grade " << f.getGradeExe() << " is not signed." << std::endl);
+}
+
 Form& Form::operator=(const Form &src) {
 	if (this != &src) {
 

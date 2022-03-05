@@ -1,107 +1,80 @@
 #include "Form.hpp"
 
-Form::Form(): _name(""), _isSigned(false), _gradeSign(1), _gradeExe(1) {
-	std::cout << "Void Form Constructor called" << std::endl;
+// Constructors & Destructors
+
+Form::Form(void): _formName("Standard Form"), _signGrade(1), _execGrade(1), _isSigned(false) {
+
 }
 
-Form::Form(Form const &src):_name(src._name), _isSigned(src._isSigned), _gradeSign(src._gradeSign), _gradeExe(src._gradeExe) {
+Form::Form(std::string form, unsigned int sG, unsigned int eG): _formName(form), _signGrade(sG), _execGrade(eG), _isSigned(false) {
+	try {
+		if (sG > 150 || eG > 150) {
+			throw Form::GradeTooLowException();
+		} else if (sG < 1 || eG < 1) {
+			throw Form::GradeTooHighException();
+		}
+	} catch(Form::GradeTooLowException& e) {
+		std::cout << "Exception caught: " << e.what() << std::endl;
+	} catch(Form::GradeTooHighException& e) {
+		std::cout << "Exception caught: " << e.what() << std::endl;
+	}
+}
+
+Form::Form(Form const & src): _formName(src._formName), _signGrade(src._signGrade), _execGrade(src._execGrade), _isSigned(src._isSigned) {
 	*this = src;
 }
 
-Form::Form(std::string form, int grToSign, int grToExe): _name(form), _isSigned(false), _gradeSign(grToSign), _gradeExe(grToExe) {
-	try {
-			if (this->getGradeExe() > 150 || this->getGradeSign() > 150) {
-				throw Form::GradeTooLowException();
-			}
-			else if (this->getGradeExe() < 1 || this->getGradeExe() < 1) {
-				throw Form::GradeTooHighException();
-			}
-		}
-	catch(Form::GradeTooHighException &e) {
-		std::cout << "Exception: " << e.what() << std::endl;
-	}
-	catch(Form::GradeTooLowException &e) {
-		std::cout << "Exception: " << e.what() << std::endl;
-	}
+Form::~Form(void){
+
 }
 
-Form& Form::operator=(const Form &src) {
-	if (this != &src) {
+// Operators
 
-	}
-	return (*this);
+Form&			Form::operator=(Form const & other) {
+	if (this != &other)
+		return *this;
+	return *this;
 }
 
-Form::~Form() {
-	std::cout << "Form Destructor called" << std::endl;
+std::ostream&	operator<<(std::ostream &o, Form & obj) {
+	return (o << "Form "+ obj.getFormName() + " with sign grade " << obj.getSignGrade() << " and execution grade " << obj.getExecGrade() << ( obj.getIsSigned() ? " is signed" : " is not signed" ));
 }
 
-//Non Constructors:
+// Getters
 
-void			Form::beSigned(Bureaucrat &ref) {
-	std::cout << "Form is :" << this->_isSigned << std::endl;
-	try {
-		if (ref.getGrade() <= this->getGradeSign()) {
-			this->_isSigned = true;
-		}
-		else {
-			throw Form::GradeTooLowException();
-		}
-	}
-	catch(Form::GradeTooLowException &e) {
-			std::cout << "Exception: " << e.what() << std::endl;
-	}
-	ref.signForm(*this);
+std::string		Form::getFormName(void) const {
+	return this->_formName;
 }
 
-std::ostream&	operator<<(std::ostream &stream, Form &f) {
-	if (f.is_Signed() == true) 
-		return (stream << "Form \"" << f.getName() <<  "\" with Sign Grade " << f.getGradeSign() << " and Execution Grade " << f.getGradeExe() << " is signed" << std::endl);
-	else 
-		return (stream << "Form \"" << f.getName() <<  "\" with Sign Grade " << f.getGradeSign() << " and Execution Grade " << f.getGradeExe() << " is not signed." << std::endl);
+unsigned int	Form::getSignGrade(void) const {
+	return this->_signGrade;
 }
 
-bool			Form::is_Signed() {
+unsigned int	Form::getExecGrade(void) const {
+	return this->_execGrade;
+}
+
+bool			Form::getIsSigned(void) const {
 	return this->_isSigned;
 }
 
-// int				Form::getGradeSign() {
-// 	// return this->_gradeSign;
-// }
+// Class Functions
 
-// int				Form::getGradeExe() {
-// 	// return this->_gradeExe;
-// }
-
-std::string		Form::getName() {
-	return this->_name;
+void	Form::beSigned(Bureaucrat const & b){
+	b.getGrade() <= this->getSignGrade() 
+		? this->_isSigned = true  
+		: throw Form::GradeTooLowException();
 }
 
-
-// Excemptions
-const char* Form::GradeTooHighException::what(void) const throw() {
-	return ("Grade Too High");
+// Nested Classes
+const char * Form::GradeTooHighException::what() const throw () {
+	return ("Grade too high.");
 }
 
-const char* Form::GradeTooLowException::what(void) const throw() {
-	return ("Grade Too Low");
+const char * Form::GradeTooLowException::what() const throw () {
+	return ("Grade too low.");
 }
 
-
-// Setters
-
-void		Form::setGradeSign(int grade) {
-
-	this->_gradeSign = grade;
+const char * Form::NoSignRightsException::what() const throw () {
+	return ("No sign rights.");
 }
-
-void		Form::setGradeExe(int grade) {
-
-	this->_gradeExe = grade;
-}
-
-void		Form::setName(std::string name) {
-
-	this-> 
-}
-void		Form::setSignature(bool signed);
