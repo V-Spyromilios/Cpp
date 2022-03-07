@@ -4,11 +4,23 @@
 #include <climits>
 #include <iomanip>
 #include <cfloat>
+#include <cmath>
+
+ bool	hasDots(std::string str) {
+	int j = 0;
+	for (size_t i = 0; i < str.length(); i++) {
+		if (str[i] == '.') { j++; }
+	}
+	 if (j > 1) {
+		 return true;
+	}
+	return false;
+ }
 
 int		main(int argc, char *argv[]) {
 
 	if (argc !=2) {
-		std::cout << "Max one argument to be provided" << std::endl;
+		std::cout << "please retry with one argument." << std::endl;
 		return (-1);
 	}
 	std::string str = argv[1];
@@ -16,8 +28,12 @@ int		main(int argc, char *argv[]) {
 		str.at(i) = std::tolower(str.at(i));
 	}
 	bool isInf = (str.compare(0, str.length(), "inf") == 0 || str.compare(0, str.length(), "+inf") == 0 || str.compare(0, str.length(), "-inf") == 0);
-	bool isDot = (str.find('.') != std::string::npos);
-	std::cout << "Is Dot? " << isDot << std::endl;
+	
+	if (hasDots(str)) {
+		std::cout << "Check your input, too many dots!" << std::endl;
+		return (-1);
+	}
+	//remove f of floats
 	if (!isInf && str.at(str.length() -1 ) == 'f') {
 		str =str.substr(0, str.length() -1);
 	}
@@ -30,11 +46,18 @@ int		main(int argc, char *argv[]) {
 		std::stringstream ss(str);
 		ss >> ld;
 	}
-	std::cout << "==== CONVERTER ====" << std::endl << std::endl;
+	if ((ld == 0 && str.compare(0, str.length(), "0") != 0) && ((str.compare(0, str.length(), "inff") == 0 || str.compare(0, str.length(), "-inff") == 0 
+		|| str.compare(0, str.length(), "inf") == 0 ||str.compare(0, str.length(), "-inf") == 0 
+		|| str.compare(0, str.length(), "+inf") == 0|| str.compare(0, str.length(), "+inff") == 0))) {
+		std::cout << "INVALID ARGUMENT" << std::endl;
+		return (-1);
+	}
+	std::cout << std::endl << "==== CONVERTER ====" << std::endl << std::endl;
+
+	// Char
 	if (isinf(ld) || isnan(ld) || ld < CHAR_MIN || ld > CHAR_MAX) {
 		std::cout << "Char: Impossible" << std::endl;
 	}
-	// Char
 	else if (std::isprint(static_cast<char>(ld))) {
 		std::cout << "Char: " << static_cast<char>(ld) << std::endl;
 	}
@@ -43,7 +66,7 @@ int		main(int argc, char *argv[]) {
 	}
 
 	//Int
-	if (isinf(ld) || isnan(ld) || (ld < INT_MIN || ld > INT_MAX)) {
+	if (isinf(ld) || ::isnan(ld) || (ld < INT_MIN || ld > INT_MAX)) {
 		std::cout << "Int: Impossible" << std::endl;
 	}
 	else {
