@@ -1,6 +1,9 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <climits>
+#include <iomanip>
+#include <cfloat>
 
 int		main(int argc, char *argv[]) {
 
@@ -24,13 +27,13 @@ int		main(int argc, char *argv[]) {
 
 	}
 	else {
-		std::sstream ss(str);
+		std::stringstream ss(str);
 		ss >> ld;
 	}
+	std::cout << "==== CONVERTER ====" << std::endl << std::endl;
 	if (isinf(ld) || isnan(ld) || ld < CHAR_MIN || ld > CHAR_MAX) {
 		std::cout << "Char: Impossible" << std::endl;
 	}
-
 	// Char
 	else if (std::isprint(static_cast<char>(ld))) {
 		std::cout << "Char: " << static_cast<char>(ld) << std::endl;
@@ -40,7 +43,7 @@ int		main(int argc, char *argv[]) {
 	}
 
 	//Int
-	if (! (isinf(ld) || isnan(ld)) || ld < INT_MIN || ld > INT_MAX)) {
+	if (isinf(ld) || isnan(ld) || (ld < INT_MIN || ld > INT_MAX)) {
 		std::cout << "Int: Impossible" << std::endl;
 	}
 	else {
@@ -48,13 +51,20 @@ int		main(int argc, char *argv[]) {
 	}
 
 	//Float
-	if (! (isinf(ld) || isnan(ld)) || ld < FLT_MIN || ld ) {
+	if ((isinf(ld) || isnan(ld)) && (ld < FLT_MIN || ld > FLT_MAX )) {
 		std::cout << "Float: Impossible" << std::endl;
 	}
 	else {
-		std::cout << "Float: " << std::setprecission(1) << std::fixed << static_cast<float>(ld) <<"f" << std::endl;
+		std::cout << "Float: " << std::setprecision(1) << std::fixed << static_cast<float>(ld) <<"f" << std::endl;
 	}
 
+	//Double
+	if ( (isinf(ld) || isnan(ld)) && (ld < DBL_MIN || ld > DBL_MAX)) {
+		std::cout << "Double: Impossible" << std::endl << std::endl;
+	}
+	else {
+		std::cout << "Double: " << std::setprecision(2) << std::fixed << static_cast<double>(ld) << std::endl << std::endl;
+	}
 
 	return (0);
 }
