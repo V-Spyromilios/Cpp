@@ -4,7 +4,7 @@ CC = c++
 
 FLAGS = -Werror -Wall -Wextra -std=c++98
 
-SRC = main.cpp Bureaucrat.cpp Form.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp Intern.cpp
+SRC = main.cpp
 
 RM = rm -f
 
