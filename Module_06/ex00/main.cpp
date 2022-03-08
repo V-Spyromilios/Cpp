@@ -1,93 +1,64 @@
 #include <iostream>
-#include <string>
-#include <sstream>
-#include <climits>
-#include <iomanip>
-#include <cfloat>
 #include <cmath>
+#include <limits>
 
- bool	hasDots(std::string str) {
-	int j = 0;
-	for (size_t i = 0; i < str.length(); i++) {
-		if (str[i] == '.') { j++; }
+bool 	_isDigitValue(std::string value)
+{
+	int len = value.length();
+	for (int i = 0; i < len; ++i) {
+		if ((value[i] == '-' || value[i] == '+') && i == 0)
+			continue ;
+		else if (value[i] == 'f' && i + 1 == len)
+			continue ;
+		else if (isdigit(value[i]) || value[i] == '.' || value[i] == ',')
+			continue ;
+		else
+			return (false);
 	}
-	 if (j > 1) {
-		 return true;
-	}
-	return false;
- }
+	return (true);
+}
 
-int		main(int argc, char *argv[]) {
+bool isSpecial(std::string value)
+{
+	return (value == "-inff" || value == "+inff" || value == "nanf" || value == "nan" || value == "-inf" || value == "+inf");
+}
 
-	if (argc !=2) {
-		std::cout << "please retry with one argument." << std::endl;
-		return (-1);
-	}
-	std::string str = argv[1];
-	for (size_t i = 0; i < str.length(); i++) {
-		str.at(i) = std::tolower(str.at(i));
-	}
-	bool isInf = (str.compare(0, str.length(), "inf") == 0 || str.compare(0, str.length(), "+inf") == 0 || str.compare(0, str.length(), "-inf") == 0);
-	
-	if (hasDots(str)) {
-		std::cout << "Check your input, too many dots!" << std::endl;
-		return (-1);
-	}
-	//remove f of floats
-	if (!isInf && str.at(str.length() -1 ) == 'f') {
-		str =str.substr(0, str.length() -1);
-	}
-	long double ld;
-	if (str.at(0) == '\'' && str.at(2) == '\'') {
-		ld = static_cast<int>(str[1]);
-
-	}
-	else {
-		std::stringstream ss(str);
-		ss >> ld;
-	}
-	if ((ld == 0 && str.compare(0, str.length(), "0") != 0) && ((str.compare(0, str.length(), "inff") == 0 || str.compare(0, str.length(), "-inff") == 0 
-		|| str.compare(0, str.length(), "inf") == 0 ||str.compare(0, str.length(), "-inf") == 0 
-		|| str.compare(0, str.length(), "+inf") == 0|| str.compare(0, str.length(), "+inff") == 0))) {
-		std::cout << "INVALID ARGUMENT" << std::endl;
-		return (-1);
-	}
-	std::cout << std::endl << "==== CONVERTER ====" << std::endl << std::endl;
-
-	// Char
-	if (isinf(ld) || isnan(ld) || ld < CHAR_MIN || ld > CHAR_MAX) {
-		std::cout << "Char: Impossible" << std::endl;
-	}
-	else if (std::isprint(static_cast<char>(ld))) {
-		std::cout << "Char: " << static_cast<char>(ld) << std::endl;
-	}
-	else {
-		std::cout << "Char: Not displayable" << std::endl;
+int	main(int ac, char **av)
+{
+	if (ac != 2)
+	{
+		std::cout << "Usage: ./convert '<value>'" << std::endl;
+		return 1;
 	}
 
-	//Int
-	if (isinf(ld) || ::isnan(ld) || (ld < INT_MIN || ld > INT_MAX)) {
-		std::cout << "Int: Impossible" << std::endl;
-	}
-	else {
-		std::cout << "Int: " << static_cast<int>(ld) << std::endl;
-	}
+	std::string value = av[1];
+	double	nbr;
 
-	//Float
-	if ((isinf(ld) || isnan(ld)) && (ld < FLT_MIN || ld > FLT_MAX )) {
-		std::cout << "Float: Impossible" << std::endl;
+	if (!_isDigitValue(value) && !isSpecial(value))
+	{
+		if (value.length() != 1)
+		{
+			std::cout << "Error: unrecognized value" << std::endl;
+			return 1;
+		}
+		else
+			nbr = static_cast<double>(value[0]);
 	}
-	else {
-		std::cout << "Float: " << std::setprecision(1) << std::fixed << static_cast<float>(ld) <<"f" << std::endl;
-	}
+	else
+		nbr = std::stof(value);
 
-	//Double
-	if ( (isinf(ld) || isnan(ld)) && (ld < DBL_MIN || ld > DBL_MAX)) {
-		std::cout << "Double: Impossible" << std::endl << std::endl;
-	}
-	else {
-		std::cout << "Double: " << std::setprecision(2) << std::fixed << static_cast<double>(ld) << std::endl << std::endl;
-	}
-
-	return (0);
+	char c = static_cast<char>(nbr);
+	if (isSpecial(value) || nbr > std::numeric_limits<char>::max() || nbr < std::numeric_limits<char>::min())
+		std::cout << "char: impossible" << std::endl;
+	else if (nbr < 32 || nbr >= 127 )
+		std::cout << "char: Non displayable" << std::endl;
+	else
+		std::cout << "char: '" << c << "'" << std::endl;
+	if (isSpecial(value) || nbr > std::numeric_limits<int>::max() || nbr < std::numeric_limits<int>::min())
+		std::cout << "int: impossible" << std::endl;
+	else
+		std::cout << "int: " << static_cast<int>(nbr) << std::endl;
+	std::cout << "float: " << static_cast<float>(nbr) << (static_cast<bool>(std::fmod(nbr, 1)) ? "f" : ".0f") << std::endl;
+	std::cout << "double: " << static_cast<double>(nbr) << (static_cast<bool>(std::fmod(nbr, 1)) ? "" : ".0") << std::endl;
+	return 0;
 }
