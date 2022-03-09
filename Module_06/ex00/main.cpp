@@ -23,15 +23,15 @@ bool isSpecial(std::string value)
 	return (value == "-inff" || value == "+inff" || value == "nanf" || value == "nan" || value == "-inf" || value == "+inf");
 }
 
-int	main(int ac, char **av)
+int	main(int argc, char **argv)
 {
-	if (ac != 2)
+	if (argc != 2)
 	{
 		std::cout << "Usage: ./convert '<value>'" << std::endl;
 		return 1;
 	}
 
-	std::string value = av[1];
+	std::string value = argv[1];
 	double	nbr;
 
 	if (!_isDigitValue(value) && !isSpecial(value))
