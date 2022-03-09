@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 {
 	if (argc != 2)
 	{
-		std::cout << "Usage: ./convert '<value>'" << std::endl;
+		std::cout << "Please provide ONE argument" << std::endl;
 		return 1;
 	}
 
@@ -38,7 +38,7 @@ int	main(int argc, char **argv)
 	{
 		if (value.length() != 1)
 		{
-			std::cout << "Error: unrecognized value" << std::endl;
+			std::cout << "Error: Not a valid argument" << std::endl;
 			return 1;
 		}
 		else
