@@ -9,7 +9,7 @@ int		main() {
 	// sp.addNumber(9);
 	// sp.addNumber(11);
 
-	sp.addMany(0,10);
+	sp.addMany(0, 7);
 	
 	
 	sp.printVector();

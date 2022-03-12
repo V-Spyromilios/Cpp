@@ -17,9 +17,9 @@ public:
 	void	addNumber(int i);
 	void	shortestSpan() const;
 	void	longestSpan() const;
-	int		getN() const;
 	void	printVector();
 	void	addMany(int start, int end); // [)
+	unsigned long	getN() const;
 
 	class OutOfBound: public std::exception {
 		public:
@@ -29,6 +29,6 @@ public:
 private:
 
 	std::vector<int> 	_vectoras;
-	unsigned int		_n;
+	unsigned long		_n;
 
 };

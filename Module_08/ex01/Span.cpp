@@ -17,7 +17,7 @@ Span::Span(Span const &src) {
 		this->_vectoras.clear();
 	//if (src.getN() > 0) 
 		//this->_vectoras = new std::vector<int>();
-	for (int c = 0; c < src.getN(); c++) {
+	for (unsigned long c = 0; c < src.getN(); c++) {
 		this->_vectoras.push_back(src._vectoras[c]);
 		
 	}
@@ -64,7 +64,7 @@ void		Span::longestSpan() const{
 
 }
 
-int		Span::getN() const{
+unsigned long	Span::getN() const{
 	return this->_n;
 }
 
@@ -77,11 +77,13 @@ void		Span::printVector() {
 void	Span::addMany(int start, int end) {
 	for (int i = start; i < end; i++) {
 		try {
-		addNumber(i);
+		// addNumber(i);
+		if (this->_vectoras.size() < this->getN() )
+		this->_vectoras.push_back(i);
+		else  { throw Span::OutOfBound(); }
 		}
-
-	catch (Span::OutOfBound &e) {
-		std::cout << "Exception caught:" << e.what() << std::endl;
+		catch (Span::OutOfBound &e) {
+			std::cout << "Exception caught:" << e.what() << std::endl;
 	}
 	}
 }
