@@ -1,25 +1,39 @@
 #include <iostream>
 
-struct Data {};
+class Data {
+	public:
+	Data() {};
+	Data(int rank, std::string name): _rank(rank), _name(name) {};
 
-uintptr_t serialize(Data* content)
-{
+int getRank() { return this->_rank; }
+std::string getName() { return this->_name; }
+
+private:
+
+int 		_rank;
+std::string _name;
+};
+
+uintptr_t serialize(Data* content) {
 	return reinterpret_cast<uintptr_t>(content);
 }
 
-Data* deserialize(uintptr_t content)
-{
+Data* deserialize(uintptr_t content) {
 	return reinterpret_cast<Data*>(content);
 }
 
-int main()
-{
-	Data* data = deserialize(42);
-	
-	uintptr_t tmp = serialize(data);
+int main() {
+	Data d(42, "Vagelis");
+	Data* d1 = &d;
+	std::cout << d1->getName() << std::endl;
+	std::cout << d1->getRank() << std::endl;
+	std::cout << "====" << std::endl;
 
-	Data* data2 = deserialize(tmp);
-	std::cout << data << std::endl;
-	std::cout << data2 << std::endl;
-	std::cout << tmp << std::endl;
+	uintptr_t tmp = serialize(d1);
+	Data* d2 = deserialize(tmp);
+	std::cout << d2->getName() << std::endl;
+	std::cout << d2->getRank() << std::endl;
+	std::cout << "====" << std::endl;
+
+	return (0);
 }

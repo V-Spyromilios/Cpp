@@ -41,7 +41,7 @@ Array<VW>& Array<VW>::operator=(Array<VW> const &src) {
 		}
 	}
 	this->_size = src.size();
-	return (*this);
+	return (*this); // a = b
 }
 
 template<typename VW>

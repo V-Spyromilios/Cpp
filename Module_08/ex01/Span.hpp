@@ -18,7 +18,7 @@ public:
 	int		shortestSpan() const;
 	int		longestSpan() const;
 	void	printVector() const;
-	void	addMany(int x); // excl.
+	void	addMany(int x);
 	unsigned long	getN() const;
 
 	class OutOfBound: public std::exception {

@@ -10,7 +10,7 @@ bool 	_isDigitValue(std::string value)
 			continue ;
 		else if (value[i] == 'f' && i + 1 == len)
 			continue ;
-		else if (isdigit(value[i]) || value[i] == '.' || value[i] == ',')
+		else if (isdigit(value[i]) || value[i] == '.')
 			continue ;
 		else
 			return (false);
