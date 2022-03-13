@@ -15,10 +15,10 @@ public:
 
 	Span&	operator=(Span const &src);
 	void	addNumber(int i);
-	void	shortestSpan() const;
-	void	longestSpan() const;
-	void	printVector();
-	void	addMany(int start, int end); // [)
+	int		shortestSpan() const;
+	int		longestSpan() const;
+	void	printVector() const;
+	void	addMany(int x); // excl.
 	unsigned long	getN() const;
 
 	class OutOfBound: public std::exception {
@@ -26,9 +26,19 @@ public:
 			virtual const char* what() const throw();
 	};
 
+	class OutOfMemory: public std::exception {
+		public:
+			virtual const char* what() const throw();
+	};
+
+	class SpanImpossible: public std::exception {
+		public:
+			virtual const char* what() const throw();
+	};
+
 private:
 
 	std::vector<int> 	_vectoras;
-	unsigned long		_n;
+	unsigned long		_limit;
 
 };
