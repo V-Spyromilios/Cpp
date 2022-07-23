@@ -1,4 +1,5 @@
 #include "includes.hpp"
+#include <vector>
 
 PhoneBook::~PhoneBook()
 {
